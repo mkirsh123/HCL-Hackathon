@@ -5,7 +5,7 @@ package com.example.healthcare.DTO;
 import java.util.List;
 import java.util.UUID;
 
-import com.example.healthcare.entity.providerappointment;
+// import com.example.healthcare.entity.providerappointment;
 // import com.example.healthcare.entity.userinfo;
 
 public class ProviderResponseDTO {
