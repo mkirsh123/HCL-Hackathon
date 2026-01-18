@@ -9,25 +9,35 @@ const Home = () => {
   const [cookies, removeCookie] = useCookies([]);
   const [username, setUsername] = useState("");
   useEffect(() => {
-    const verifyCookie = async () => {
+  const verifyCookie = async () => {
+    try {
       if (!cookies.token) {
         navigate("/login");
+        return;
       }
-      const { data } = await axios.post(
-        "https://trading-platform-user-backend.onrender.com",
-        {},
+
+      const { data } = await axios.get(
+        "http://localhost:4000/verify",
         { withCredentials: true }
       );
+
       const { status, user } = data;
-      setUsername(user);
-      return status
-        ? toast(`Hello ${user}`, {
-            position: "top-right",
-          })
-        : (removeCookie("token"), navigate("/login"));
-    };
-    verifyCookie();
-  }, [cookies, navigate, removeCookie]);
+
+      if (status) {
+        setUsername(user);
+        toast(`Hello ${user}`, { position: "top-right" });
+      } else {
+        removeCookie("token");
+        navigate("/login");
+      }
+    } catch (err) {
+      removeCookie("token");
+      navigate("/login");
+    }
+  };
+  verifyCookie();
+}, [cookies, navigate, removeCookie]);
+
   const Logout = () => {
     removeCookie("token");
     navigate("/signup");
