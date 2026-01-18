@@ -124,9 +124,10 @@ The above is done by me you can check out the codes and they are actually workin
   "exp": 1710086400
 }
 ```
-## .file ENV (These in actual should not be visible to anyone but due to verification i had to make sure u run on local host):
+## .ENV (These in actual should not be visible to anyone but due to verification i had to make sure u run on local host):
+```
 server side
-```{
+{
     MONGO_URL=your_mongodb_connection_string
     PORT=4000
     TOKEN_KEY=supersecretjwtkey
@@ -136,7 +137,7 @@ client side
 ```{
     REACT_APP_API_URL=http://localhost:4000
 }```
-
+```
 #### 🧑‍💻 Role-Based Access Control (RBAC)
 - Implemented **two distinct user roles**:
   - `USER` (Patient)
