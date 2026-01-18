@@ -249,4 +249,4 @@ GET /users/22222222-2222-2222-2222-222222222222/dashboard
 
 3.SQL-based initialization avoids Hibernate schema drift
 
-4.Clear separation of DTOs, entities, repositories, and services **
+4.Clear separation of DTOs, entities, repositories, and services 
