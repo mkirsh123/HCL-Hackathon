@@ -15,14 +15,21 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, "Your password is required"],
   },
+  role: {
+    type: String,
+    required: [true, "Your role is required"],
+  },
   createdAt: {
     type: Date,
     default: new Date(),
   },
 });
 
-userSchema.pre("save", async function () {
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) return next();
   this.password = await bcrypt.hash(this.password, 12);
+  next();
 });
+
 
 module.exports = mongoose.model("User", userSchema);
