@@ -1,3 +1,14 @@
+##Contribution and Workdone:
+Rama Krishna - done the frontend and backend for the user authentication 
+Tech Stack used React.js,Node.js,Express.js,MongoDB.
+---
+Uday babu - forntend Part (Landing page and Dashboard)
+Tech Stack used React.js
+---
+Shanmukha - backend part (Dashboard)
+Tech Stack used springboot
+---
+
 ## 🧭 System Workflow Diagram
 
 ```mermaid
