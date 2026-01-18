@@ -85,11 +85,11 @@ This project uses a **separated frontend and backend architecture**, where:
 
 ## 📁 Project Structure
 
-├── client/ # React Frontend
-├── server/ # Node.js + Express Authentication Backend
-├── healthcare/ # Spring Boot Backend (Dashboard & APIs)
-├── frontend/ # React.Js frontend (landing page + Dashboard UI)
-└── README.md
+├── client/ # React Frontend <br />
+├── server/ # Node.js + Express Authentication Backend <br />
+├── healthcare/ # Spring Boot Backend (Dashboard & APIs) <br />
+├── frontend/ # React.Js frontend (landing page + Dashboard UI) <br />
+└── README.md <br />
 
 ### Signup
 1. User submits email, username, password, and role
