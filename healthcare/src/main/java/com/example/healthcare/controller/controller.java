@@ -3,6 +3,7 @@ package com.example.healthcare.controller;
 import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +19,7 @@ import com.example.healthcare.DTO.UserRequestDTO;
 import com.example.healthcare.DTO.UserResponseDTO;
 import com.example.healthcare.DTO.UsergoalsRequestDTO;
 import com.example.healthcare.service.HealthCareService;
+import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 
 @RestController
 @RequestMapping
@@ -42,7 +44,7 @@ public class controller {
         }
 
         @PostMapping("/users")
-    public ResponseEntity<Void> addUser(@RequestBody UserRequestDTO requestDTO) {
+    public ResponseEntity<Void> addUser(@Validated({Default.class}) @RequestBody UserRequestDTO requestDTO) {
         healthCareService.createUser(requestDTO);
         return ResponseEntity.noContent().build();
     }
@@ -51,15 +53,17 @@ public class controller {
         @PutMapping("/users/{id}")
     public ResponseEntity<Void> updateUser(
             @PathVariable UUID id,
+            @Validated({Default.class})
             @RequestBody UserRequestDTO requestDTO) {
 
         healthCareService.updateUser(id, requestDTO);
         return ResponseEntity.noContent().build();
     }
 
-         @PostMapping("/users/{id}/goals")
+        @PostMapping("/users/{id}/goals")
     public ResponseEntity<Void> setGoals(
             @PathVariable UUID id,
+            @Validated({Default.class})
             @RequestBody UsergoalsRequestDTO requestDTO) {
 
         healthCareService.setGoals(id, requestDTO);
@@ -69,6 +73,7 @@ public class controller {
         @PutMapping("/users/{id}/goals")
     public ResponseEntity<UserResponseDTO> updateGoals(
             @PathVariable UUID id,
+            @Validated({Default.class})
             @RequestBody UsergoalsRequestDTO requestDTO) {
 
         UserResponseDTO response = healthCareService.updateGoals(id, requestDTO);
@@ -77,6 +82,7 @@ public class controller {
 
          @PostMapping("/providers")
     public ResponseEntity<Void> addProvider(
+            @Validated({Default.class})
             @RequestBody ProviderRequestDTO requestDTO) {
 
         healthCareService.createProvider(requestDTO);
@@ -86,6 +92,7 @@ public class controller {
          @PostMapping("/providers/{id}/appointments")
     public ResponseEntity<Void> addProviderAppointment(
             @PathVariable UUID id,
+            @Validated({Default.class})
             @RequestBody ProviderAppointmentDTO requestDTO) {
 
         healthCareService.addAppointment(id, requestDTO);
