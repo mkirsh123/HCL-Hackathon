@@ -1,4 +1,4 @@
-## Contribution and Workdone:
+<img width="1548" height="373" alt="image" src="https://github.com/user-attachments/assets/0c506524-8a58-41cd-ad87-fc682cb111c7" />## Contribution and Workdone:
 Rama Krishna - done the frontend and backend for the user authentication 
 Tech Stack used React.js,Node.js,Express.js,MongoDB.
 ---
@@ -75,6 +75,22 @@ Roles are stored in the database and embedded inside the JWT token.
 
 ## 🔑 Authentication Flow (JWT)
 
+## ▶️ Running the Project Locally (Client + Server)
+
+This project uses a **separated frontend and backend architecture**, where:
+- React frontend runs on **localhost:3000**
+- Node.js authentication backend runs on **localhost:4000**
+
+---
+
+## 📁 Project Structure
+
+├── client/ # React Frontend
+├── server/ # Node.js + Express Authentication Backend
+├── healthcare/ # Spring Boot Backend (Dashboard & APIs)
+├── frontend/ # React.Js frontend (landing page + Dashboard UI)
+└── README.md
+
 ### Signup
 1. User submits email, username, password, and role
 2. Backend:
@@ -107,6 +123,53 @@ Roles are stored in the database and embedded inside the JWT token.
   "exp": 1710086400
 }
 ```
+## .file ENV (These in actual should not be visible to anyone but due to verification i had to make sure u run on local host):
+server side
+```{
+    MONGO_URL=your_mongodb_connection_string
+    PORT=4000
+    TOKEN_KEY=supersecretjwtkey
+}```
+---
+client side
+```{
+    REACT_APP_API_URL=http://localhost:4000
+}```
+
+#### 🧑‍💻 Role-Based Access Control (RBAC)
+- Implemented **two distinct user roles**:
+  - `USER` (Patient)
+  - `PROVIDER` (Healthcare Provider)
+- Role information is:
+  - Stored in MongoDB.
+  - Embedded inside the JWT payload.
+- Built **authorization middleware** to:
+  - Verify JWT validity.
+  - Restrict access to routes based on user roles.
+- Enabled automatic **role-based redirection** after login:
+  - Users → User Dashboard
+  - Providers → Provider Dashboard
+
+#### 🔍 Session Management & Security
+- Developed a **session verification (`/verify`) API** to validate user sessions on every protected page load.
+- Implemented frontend logic to:
+  - Automatically redirect unauthenticated users to the Login page.
+  - Handle expired or invalid JWT tokens gracefully.
+- Implemented **logout functionality** by clearing authentication cookies and terminating sessions.
+
+#### 🌐 Frontend–Backend Integration
+- Integrated frontend authentication logic with backend APIs using **Axios**.
+- Ensured secure cross-origin communication using:
+  - Proper CORS configuration.
+  - Cookie-based authentication with `withCredentials`.
+- Used **environment variables** for managing API URLs and secrets across development and production environments.
+
+#### 🚀 Deployment Support
+- Assisted in deploying:
+  - Frontend on **Netlify**
+  - Backend on **Render**
+- Configured environment variables for production.
+- Ensured authentication flows worked seamlessly across deployed environments.
 
 # 🏥 Healthcare Backend Service(Note Read healthcare file not Backend1/Backend/healthcare)
 
