@@ -1,17 +1,19 @@
 import React, { useState } from "react";
-import { Link} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Signup = () => {
+  const navigate = useNavigate();
   const [inputValue, setInputValue] = useState({
     email: "",
     username: "",
     password: "",
+    role: ""
   });
 
-  const { email, username, password } = inputValue;
+  const { email, username, password, role } = inputValue;
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -37,10 +39,10 @@ const Signup = () => {
     if (!email || !username || !password) {
       return handleError("All fields are required!");
     }
-    console.log("API URL:", `${process.env.REACT_APP_API_URL}signup`);
+
     try {
       const { data } = await axios.post(
-        `${process.env.REACT_APP_API_URL}signup`,
+        `${process.env.REACT_APP_API_URL}/signup`,
         inputValue,
         { withCredentials: true }
       );
@@ -50,7 +52,7 @@ const Signup = () => {
       if (success) {
         handleSuccess(message);
         setTimeout(() => {
-          window.location.href = "https://tradingplatformdashboard.netlify.app"; // dashboard project
+          navigate("/");
         }, 1000);
       } else {
         handleError(message);
@@ -66,6 +68,7 @@ const Signup = () => {
       email: "",
       username: "",
       password: "",
+      role: ""
     });
   };
 
@@ -105,6 +108,19 @@ const Signup = () => {
             onChange={handleOnChange}
             required
           />
+        </div>
+        <div>
+          <label htmlFor="role">Role</label>
+          <select
+            name="role"
+            value={role}
+            onChange={handleOnChange}
+            required
+          >
+            <option value="">Select a role</option>
+            <option value="USER">User</option>
+            <option value="PROVIDER">Provider</option>
+          </select>
         </div>
         <button type="submit">Submit</button>
         <span>
